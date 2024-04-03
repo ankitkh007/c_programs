@@ -1,1 +1,1 @@
-# c_programs
+# basic C programs
