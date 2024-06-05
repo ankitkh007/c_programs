@@ -3,25 +3,31 @@
 
 void frequency(char str[])
 {
-    int i,j,c=0;
+    int i,j,k,c=0,m=0;
     char ch;
     int l=strlen(str);
     for(i=0;i<l;i++)
     {
         ch=str[i];
-        
+        m=0;
+        for(k=i-1;k>=0;k--)
+        {
+            if(ch==str[k])
+            m++;
+        }
+
+        if(m>0)
+        continue;
+        else
+        {
         c=0;   
         for(j=0;j<l;j++)
         {
-            if(i<j)
-            {
-                if(str[i]==str[j])
-                continue;
-            }
             if(str[i]==str[j])
             c++;
         }
         printf("The frequency of '%c' is = %d\n",ch,c);
+        }
     }
 
     
