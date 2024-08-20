@@ -1,36 +1,47 @@
 #include<stdio.h>
-int size,que[50],front=-1,rear=-1;
+int size,cque[50],front=-1,rear=-1;
 
 void push(int x)
 {
     if(front==-1 && rear==-1)
     {
         front=rear=0;
-        que[rear]=x;
+        cque[rear]=x;
     }
     else
-    que[++rear]=x;
+    {
+        rear=(rear+1)%size;
+        cque[rear]=x;
+    }
 }
 
 int pop()
 {
+    int t;
     if(front==rear)
     {
-        int t=que[front];
+        t=cque[front];
         front=rear=-1;
-        return t;
     }
     else
-    return que[front++];
+    {
+        t=cque[front];
+        front=(front+1)%size;
+    }
+    return t;
 }
 
 void display()
 {
-    printf("The Queue is :\n");
-    for(int i=front;i<=rear;i++)
+    printf("The Circular Queue is :\n");
+    int i=front;
+
+    while (i!=rear)
     {
-        printf("%d | ",que[i]);
+        printf("%d | ", cque[i]);
+        i=(i+1)%size;
     }
+    printf("%d | ", cque[i]);
 }
 
 int main()
@@ -49,8 +60,8 @@ int main()
         switch(ch)
         {
             case 1 :
-            if(rear==size-1)
-            printf("Queue Is Full");
+            if((rear+1)%size==front)
+            printf("Circular Queue Is Full");
             else
             {
                 printf("Enter the element to insert : ");
@@ -61,14 +72,14 @@ int main()
 
             case 2:
             if(front==-1 && rear==-1)
-                printf("Queue is Empty");
+                printf("Circular Queue is Empty");
             else
                 printf("Deleted Element is = %d",pop());
             break;
 
             case 3: 
             if(front==-1 && rear==-1)
-                printf("Queue is Empty");
+                printf("Circular Queue is Empty");
             else
                 display();
             break;
