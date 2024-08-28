@@ -41,8 +41,10 @@ void merge_display()
         st1[top1+top2+1]=st2[top2--];
     }
 
+    top1=s1+s2-1;
+
     printf("The Merged Stack is : ");
-    for(int i=s1+s2-1;i>=0;i--)
+    for(int i=top1;i>=0;i--)
     {
         printf("\n%d",st1[i]);
         printf("\n__");
