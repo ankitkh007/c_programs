@@ -161,7 +161,7 @@ int main()
         {
             case 1: insert_last();
                     break;
-            case 2: insert_last();
+            case 2: insert_first();
                     break;
             case 3: display();
                     break;
