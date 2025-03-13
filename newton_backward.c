@@ -22,19 +22,19 @@ int main() {
     printf("Enter the value of x0: ");
     scanf("%f", &x0);
 
-    // Initialize the forward difference table
+    // Initialize the backward difference table
     for (i = 0; i < n; i++) {
         F[i][0] = y[i];
     }
 
-    // Forward difference table
+    // Backward difference table
     for (j = 1; j < n; j++) {
         for (i = j; i < n; i++) {
             F[i][j] = F[i][j - 1] - F[i - 1][j - 1];
         }
     }
 
-    printf("F=\n");
+    printf("Backward Difference Table:\n");
     for (i = 0; i < n; i++) {
         for (j = 0; j <= i; j++) {
             printf("%d ", F[i][j]);
@@ -44,15 +44,15 @@ int main() {
 
     // Interpolation
     h = x[1] - x[0];
-    u = (x0 - x[0]) / h;
-    s = y[0];
+    u = (x0 - x[n - 1]) / h;
+    s = y[n - 1];
     t = u;
     fact = 1;
 
     for (k = 1; k < n; k++) {
         fact = fact * k;
-        s = s + (t * F[k][k]) / fact;
-        t = t * (u - k);
+        s = s + (t * F[n - 1][k]) / fact;
+        t = t * (u + k);
     }
 
     printf("The interpolated value of f(%f) is = %f\n", x0, s);
